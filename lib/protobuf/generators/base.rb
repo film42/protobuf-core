@@ -11,7 +11,7 @@ module Protobuf
         unique_tags = tags.uniq
 
         if unique_tags.size < tags.size
-          ::Protobuf::CodeGenerator.fatal("#{type_name} object has duplicate tags. Expected #{unique_tags.size} tags, but got #{tags.size}. Suppress with PB_NO_TAG_WARNINGS=1.")
+          ::Protobuf::Compiler::CodeGenerator.fatal("#{type_name} object has duplicate tags. Expected #{unique_tags.size} tags, but got #{tags.size}. Suppress with PB_NO_TAG_WARNINGS=1.")
         end
 
         unless ENV.key?('PB_NO_TAG_WARNINGS')
@@ -23,8 +23,8 @@ module Protobuf
           end
 
           if tags.size < expected_size
-            ::Protobuf::CodeGenerator.print_tag_warning_suppress
-            ::Protobuf::CodeGenerator.warn("#{type_name} object should have #{expected_size} tags (#{range.begin}..#{range.end}), but found #{tags.size} tags.")
+            ::Protobuf::Compiler::CodeGenerator.print_tag_warning_suppress
+            ::Protobuf::Compiler::CodeGenerator.warn("#{type_name} object should have #{expected_size} tags (#{range.begin}..#{range.end}), but found #{tags.size} tags.")
           end
         end
       end

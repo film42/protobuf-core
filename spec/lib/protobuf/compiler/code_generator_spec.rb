@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-require 'protobuf/code_generator'
+require 'protobuf/compiler/code_generator'
 
-RSpec.describe ::Protobuf::CodeGenerator do
+RSpec.describe ::Protobuf::Compiler::CodeGenerator do
 
   # Some constants to shorten things up
   DESCRIPTOR = ::Google::Protobuf
@@ -43,7 +43,7 @@ RSpec.describe ::Protobuf::CodeGenerator do
         expect do
           described_class.fatal("something is wrong")
         end.to raise_error(
-          ::Protobuf::CodeGenerator::CodeGeneratorFatalError,
+          described_class::CodeGeneratorFatalError,
           "something is wrong",
         )
       end

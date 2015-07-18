@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-require 'protobuf/code_generator'
+require 'protobuf/compiler/code_generator'
 require 'protobuf/generators/base'
 
 RSpec.describe ::Protobuf::Generators::Base do
@@ -67,15 +67,15 @@ RSpec.describe ::Protobuf::Generators::Base do
   describe '#validate_tags' do
     context 'when tags are duplicated' do
       it 'fails with a GeneratorFatalError' do
-        expect(::Protobuf::CodeGenerator).to receive(:fatal).with(/FooBar object has duplicate tags\. Expected 3 tags, but got 4/)
+        expect(::Protobuf::Compiler::CodeGenerator).to receive(:fatal).with(/FooBar object has duplicate tags\. Expected 3 tags, but got 4/)
         described_class.validate_tags("FooBar", [1, 2, 2, 3])
       end
     end
 
     context 'when tags are missing in the range' do
       it 'prints a warning' do
-        expect(::Protobuf::CodeGenerator).to receive(:print_tag_warning_suppress)
-        expect(::Protobuf::CodeGenerator).to receive(:warn).with(/FooBar object should have 5 tags \(1\.\.5\), but found 4 tags/)
+        expect(::Protobuf::Compiler::CodeGenerator).to receive(:print_tag_warning_suppress)
+        expect(::Protobuf::Compiler::CodeGenerator).to receive(:warn).with(/FooBar object should have 5 tags \(1\.\.5\), but found 4 tags/)
         described_class.validate_tags("FooBar", [1, 2, 4, 5])
       end
     end

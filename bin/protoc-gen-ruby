@@ -1,16 +1,13 @@
 #!/usr/bin/env ruby
 
-# Before requiring protobuf, ensure that we will not load any
-# server or client code.
-#
-ENV['PB_NO_NETWORKING'] = '1'
-
 $LOAD_PATH << ::File.expand_path("../../lib", __FILE__)
-require 'protobuf'
-require 'protobuf/descriptors'
-require 'protobuf/code_generator'
 
+require 'protobuf/compiler/protoc_channel'
+
+# Send on fifo channel to parent
 request_bytes = STDIN.read
-code_generator = ::Protobuf::CodeGenerator.new(request_bytes)
-response_bytes = code_generator.response_bytes
+::Protobuf::Compiler::ProtocChannel.send(request_bytes)
+
+# Receive compiled bytes and send to protoc
+response_bytes = ::Protobuf::Compiler::ProtocChannel.receive
 STDOUT.print(response_bytes)

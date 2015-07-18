@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-require 'protobuf/code_generator'
+require 'protobuf/compiler/code_generator'
 require 'protobuf/generators/extension_generator'
 
 RSpec.describe ::Protobuf::Generators::ExtensionGenerator do
