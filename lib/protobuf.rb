@@ -9,7 +9,7 @@ require 'active_support/json'
 require 'active_support/notifications'
 
 require 'protobuf/deprecation'
-require 'protobuf/rpc/service'
+require 'protobuf/rpc/service_stub'
 
 module Protobuf
   # Permit unknown field on Message initialization
