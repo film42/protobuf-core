@@ -5,7 +5,5 @@ module Protobuf
         # Not implemented by protobuf-core
       end
     end
-
-    ActiveSupport.run_load_hooks(:protobuf_rpc_service, Service)
   end
 end
